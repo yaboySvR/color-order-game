@@ -11,177 +11,170 @@
       padding: 0;
     }
 
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       background: #1a1a2e;
       font-family: 'Segoe UI', sans-serif;
       color: #eee;
-      gap: 32px;
-      padding: 24px;
-    }
-
-    h1 {
-      font-size: 1.8rem;
-      letter-spacing: 2px;
-      color: #c9d1ff;
-    }
-
-    .section-label {
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #888;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .row {
       display: flex;
-      gap: 12px;
+      align-items: center;
       justify-content: center;
     }
 
-    .square {
-      width: 72px;
-      height: 72px;
-      border-radius: 10px;
-      cursor: grab;
-      border: 3px solid rgba(255,255,255,0.15);
-      transition: transform 0.1s, box-shadow 0.1s, border-color 0.15s;
-      user-select: none;
-    }
-
-    .square:active {
-      cursor: grabbing;
-    }
-
-    .square.dragging {
-      opacity: 0.4;
-      transform: scale(0.95);
-    }
-
-    .square.drag-over {
-      border-color: rgba(255,255,255,0.85);
-      transform: scale(1.12);
-      box-shadow: 0 0 18px rgba(255,255,255,0.4);
-    }
-
-    .square.answer-square {
-      cursor: default;
-    }
-
-    .controls {
+    /* 9:16 phone-sized game card */
+    #game {
+      width: 390px;
+      height: 693px;
       display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    button {
-      padding: 12px 28px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      letter-spacing: 0.5px;
-      transition: transform 0.1s, opacity 0.1s;
-    }
-
-    button:hover {
-      opacity: 0.85;
-      transform: translateY(-1px);
-    }
-
-    button:active {
-      transform: translateY(0);
-    }
-
-    #btn-check {
-      background: #4f8ef7;
-      color: #fff;
-    }
-
-    #btn-giveup {
-      background: #e05c5c;
-      color: #fff;
-    }
-
-    button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    #result {
-      font-size: 1.2rem;
-      font-weight: 600;
-      min-height: 1.6em;
-      text-align: center;
-      color: #c9d1ff;
-      letter-spacing: 0.5px;
-    }
-
-    #result.win {
-      color: #6effa0;
-      font-size: 1.5rem;
-    }
-
-    #answer-section {
-      display: none;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 32px 20px;
+      position: relative;
+      zoom: 1.5;
     }
 
-    #answer-section.visible {
-      display: flex;
-    }
-
-    /* Stats bar */
+    /* Stats */
     #stats {
       display: flex;
-      gap: 40px;
-      font-size: 1rem;
-      color: #aab0d8;
-      font-weight: 500;
+      gap: 60px;
     }
 
     #stats span {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
+      gap: 4px;
     }
 
-    #stats .stat-value {
-      font-size: 1.5rem;
+    .stat-value {
+      font-size: 2.4rem;
       font-weight: 700;
       color: #c9d1ff;
+      line-height: 1;
     }
 
-    #stats .stat-label {
+    .stat-label {
       font-size: 0.7rem;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: #666;
+      color: #555;
     }
 
-    /* Start overlay */
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(20, 20, 40, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+    /* Squares row */
+    .row {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+    }
+
+    .square {
+      width: 40px;
+      height: 40px;
+      border-radius: 7px;
+      cursor: grab;
+      border: 2px solid rgba(255,255,255,0.12);
+      transition: transform 0.1s, box-shadow 0.1s, border-color 0.15s;
+      user-select: none;
+    }
+
+    .square:active { cursor: grabbing; }
+
+    .square.dragging {
+      opacity: 0.35;
+      transform: scale(0.93);
+    }
+
+    .square.drag-over {
+      border-color: rgba(255,255,255,0.85);
+      transform: scale(1.15);
+      box-shadow: 0 0 16px rgba(255,255,255,0.35);
+    }
+
+    .square.answer-square { cursor: default; }
+
+    /* Buttons */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: transform 0.1s, opacity 0.1s;
+    }
+
+    button:hover  { opacity: 0.88; transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    #btn-check  { background: #4f8ef7; color: #fff; }
+    #btn-giveup { background: #2a2a45; color: #e05c5c; border: 2px solid #e05c5c44; }
+
+    button:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Result */
+    #result {
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-align: center;
+      color: #c9d1ff;
+      letter-spacing: 0.5px;
+      min-height: 1.5em;
+    }
+
+    #result.win {
+      color: #6effa0;
+      font-size: 1.3rem;
+    }
+
+    /* Answer section */
+    #answer-overlay {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 10px;
+      visibility: hidden;
+    }
+
+    #answer-overlay.visible { visibility: visible; }
+
+    #answer-overlay .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #555;
+      text-align: center;
+    }
+
+    /* Overlay */
+    #overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 15, 30, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 24px;
+      border-radius: inherit;
       z-index: 100;
       transition: opacity 0.4s ease;
     }
@@ -191,37 +184,24 @@
       pointer-events: none;
     }
 
-    #overlay h2 {
-      font-size: 2rem;
-      color: #c9d1ff;
-      letter-spacing: 3px;
-    }
-
-    #overlay p {
-      color: #8890bb;
-      font-size: 1rem;
-      text-align: center;
-      max-width: 360px;
-      line-height: 1.6;
-    }
-
     #btn-start {
+      width: auto;
       background: #4f8ef7;
       color: #fff;
       font-size: 1.1rem;
-      padding: 14px 40px;
-      border-radius: 10px;
+      padding: 16px 48px;
+      border-radius: 14px;
       letter-spacing: 1px;
     }
 
-    #btn-start:hover {
-      background: #6ba3ff;
-    }
+    #btn-start:hover { background: #6ba3ff; }
   </style>
 </head>
 <body>
 
-  <!-- Start overlay -->
+<div id="game">
+
+  <!-- Overlay -->
   <div id="overlay">
     <button id="btn-start">Start Game</button>
   </div>
@@ -238,220 +218,190 @@
     </span>
   </div>
 
-  <div>
-<div class="row" id="player-row"></div>
+  <!-- Player row -->
+  <div class="row" id="player-row"></div>
+
+  <!-- Answer (revealed on give up, sits right below player row) -->
+  <div id="answer-overlay">
+    <div class="section-label">Correct Order</div>
+    <div class="row" id="answer-row"></div>
   </div>
 
+  <!-- Result -->
+  <div id="result"></div>
+
+  <!-- Buttons -->
   <div class="controls">
     <button id="btn-check">Check</button>
     <button id="btn-giveup">Give Up — Reveal Answer</button>
   </div>
 
-  <div id="result"></div>
+</div>
 
-  <div id="answer-section">
-    <div class="section-label">Correct Order</div>
-    <div class="row" id="answer-row"></div>
-  </div>
+<script>
+  const COLORS = [
+    { name: 'red',    hex: '#e74c3c' },
+    { name: 'orange', hex: '#e67e22' },
+    { name: 'yellow', hex: '#f1c40f' },
+    { name: 'green',  hex: '#2ecc71' },
+    { name: 'cyan',   hex: '#1abc9c' },
+    { name: 'blue',   hex: '#3498db' },
+    { name: 'purple', hex: '#9b59b6' },
+    { name: 'pink',   hex: '#e91e8c' },
+  ];
 
-  <script>
-    const COLORS = [
-      { name: 'red',    hex: '#e74c3c' },
-      { name: 'orange', hex: '#e67e22' },
-      { name: 'yellow', hex: '#f1c40f' },
-      { name: 'green',  hex: '#2ecc71' },
-      { name: 'cyan',   hex: '#1abc9c' },
-      { name: 'blue',   hex: '#3498db' },
-      { name: 'purple', hex: '#9b59b6' },
-      { name: 'pink',   hex: '#e91e8c' },
-    ];
-
-    function shuffle(arr) {
-      const a = [...arr];
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
     }
+    return a;
+  }
 
-    function arraysEqual(a, b) {
-      return a.every((v, i) => v === b[i]);
+  // Timer
+  let timerInterval = null;
+  let seconds = 0;
+
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      seconds++;
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      document.getElementById('timer-display').textContent = `${m}:${s.toString().padStart(2, '0')}`;
+    }, 1000);
+  }
+
+  function stopTimer() { clearInterval(timerInterval); }
+
+  // Moves
+  let moves = 0;
+  function incrementMoves() {
+    moves++;
+    document.getElementById('moves-display').textContent = moves;
+  }
+
+  // Generate answer order
+  const answer = shuffle(COLORS);
+
+  // Generate player order with exactly 1 correct position
+  function generatePlayerOrder(answer) {
+    const n = answer.length;
+    const fixedPos = Math.floor(Math.random() * n);
+    const otherPositions = [], otherElements = [];
+    for (let i = 0; i < n; i++) {
+      if (i !== fixedPos) { otherPositions.push(i); otherElements.push(answer[i]); }
     }
+    let deranged;
+    do {
+      deranged = shuffle(otherElements);
+    } while (deranged.some((el, i) => el.name === answer[otherPositions[i]].name));
+    const result = new Array(n);
+    result[fixedPos] = answer[fixedPos];
+    otherPositions.forEach((pos, i) => { result[pos] = deranged[i]; });
+    return result;
+  }
 
-    // Timer
-    let timerInterval = null;
-    let seconds = 0;
+  const playerOrder = generatePlayerOrder(answer);
 
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        seconds++;
-        const m = Math.floor(seconds / 60);
-        const s = seconds % 60;
-        document.getElementById('timer-display').textContent = `${m}:${s.toString().padStart(2, '0')}`;
-      }, 1000);
-    }
+  // Build answer row
+  const answerRow = document.getElementById('answer-row');
+  answer.forEach(color => {
+    const sq = document.createElement('div');
+    sq.className = 'square answer-square';
+    sq.style.background = color.hex;
+    answerRow.appendChild(sq);
+  });
 
-    function stopTimer() {
-      clearInterval(timerInterval);
-    }
+  // Build player row
+  const playerRow = document.getElementById('player-row');
+  let dragSrc = null;
+  let swapOccurred = false;
 
-    // Moves
-    let moves = 0;
-
-    function incrementMoves() {
-      moves++;
-      document.getElementById('moves-display').textContent = moves;
-    }
-
-    // Generate answer order
-    const answer = shuffle(COLORS);
-
-    // Generate player order with exactly 1 correct position
-    function generatePlayerOrder(answer) {
-      const n = answer.length;
-      const fixedPos = Math.floor(Math.random() * n);
-
-      // Collect positions and elements that must be deranged
-      const otherPositions = [];
-      const otherElements = [];
-      for (let i = 0; i < n; i++) {
-        if (i !== fixedPos) {
-          otherPositions.push(i);
-          otherElements.push(answer[i]);
-        }
-      }
-
-      // Rejection-sample a derangement of the remaining 7 elements
-      let deranged;
-      do {
-        deranged = shuffle(otherElements);
-      } while (deranged.some((el, i) => el.name === answer[otherPositions[i]].name));
-
-      const result = new Array(n);
-      result[fixedPos] = answer[fixedPos];
-      otherPositions.forEach((pos, i) => { result[pos] = deranged[i]; });
-      return result;
-    }
-
-    const playerOrder = generatePlayerOrder(answer);
-
-    // Build answer row (hidden)
-    const answerRow = document.getElementById('answer-row');
-    answer.forEach(color => {
+  function buildPlayerRow() {
+    playerRow.innerHTML = '';
+    playerOrder.forEach((color, index) => {
       const sq = document.createElement('div');
-      sq.className = 'square answer-square';
+      sq.className = 'square';
       sq.style.background = color.hex;
-      sq.title = color.name;
-      answerRow.appendChild(sq);
-    });
+      sq.draggable = true;
+      sq.dataset.index = index;
 
-    // Build player row (draggable)
-    const playerRow = document.getElementById('player-row');
-    let dragSrc = null;
-    let swapOccurred = false;
-
-    function buildPlayerRow() {
-      playerRow.innerHTML = '';
-      playerOrder.forEach((color, index) => {
-        const sq = document.createElement('div');
-        sq.className = 'square';
-        sq.style.background = color.hex;
-        sq.title = color.name;
-        sq.draggable = true;
-        sq.dataset.index = index;
-
-        sq.addEventListener('dragstart', (e) => {
-          dragSrc = sq;
-          swapOccurred = false;
-          sq.classList.add('dragging');
-          e.dataTransfer.effectAllowed = 'move';
-        });
-
-        sq.addEventListener('dragend', () => {
-          sq.classList.remove('dragging');
-          document.querySelectorAll('.square.drag-over').forEach(s => s.classList.remove('drag-over'));
-          if (swapOccurred) {
-            incrementMoves();
-            swapOccurred = false;
-          }
-        });
-
-        sq.addEventListener('dragover', (e) => {
-          e.preventDefault();
-          if (sq !== dragSrc) sq.classList.add('drag-over');
-        });
-
-        sq.addEventListener('dragleave', () => {
-          sq.classList.remove('drag-over');
-        });
-
-        sq.addEventListener('drop', (e) => {
-          e.preventDefault();
-          sq.classList.remove('drag-over');
-          if (!dragSrc || dragSrc === sq) return;
-
-          const fromIdx = parseInt(dragSrc.dataset.index);
-          const toIdx = parseInt(sq.dataset.index);
-          [playerOrder[fromIdx], playerOrder[toIdx]] = [playerOrder[toIdx], playerOrder[fromIdx]];
-          swapOccurred = true;
-          buildPlayerRow();
-        });
-
-        playerRow.appendChild(sq);
+      sq.addEventListener('dragstart', (e) => {
+        dragSrc = sq; swapOccurred = false;
+        sq.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
       });
-    }
 
-    buildPlayerRow();
-
-    function runCheck() {
-      let correct = 0;
-      playerOrder.forEach((color, i) => {
-        if (color.name === answer[i].name) correct++;
+      sq.addEventListener('dragend', () => {
+        sq.classList.remove('dragging');
+        document.querySelectorAll('.square.drag-over').forEach(s => s.classList.remove('drag-over'));
+        if (swapOccurred) { incrementMoves(); swapOccurred = false; }
       });
-      const incorrect = 8 - correct;
-      const result = document.getElementById('result');
 
-      if (correct === 8) {
-        result.textContent = `You got it! All 8 correct — ${moves} move${moves !== 1 ? 's' : ''} in ${document.getElementById('timer-display').textContent}`;
-        result.className = 'win';
-        stopTimer();
-        disableGame();
-      } else {
-        result.className = '';
-        result.textContent = `${correct} correct, ${incorrect} incorrect`;
-      }
-    }
+      sq.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        if (sq !== dragSrc) sq.classList.add('drag-over');
+      });
 
-    // Start button
-    document.getElementById('btn-start').addEventListener('click', () => {
-      const overlay = document.getElementById('overlay');
-      overlay.classList.add('hidden');
-      overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
-      startTimer();
-      runCheck();
+      sq.addEventListener('dragleave', () => sq.classList.remove('drag-over'));
+
+      sq.addEventListener('drop', (e) => {
+        e.preventDefault();
+        sq.classList.remove('drag-over');
+        if (!dragSrc || dragSrc === sq) return;
+        const fromIdx = parseInt(dragSrc.dataset.index);
+        const toIdx   = parseInt(sq.dataset.index);
+        [playerOrder[fromIdx], playerOrder[toIdx]] = [playerOrder[toIdx], playerOrder[fromIdx]];
+        swapOccurred = true;
+        buildPlayerRow();
+      });
+
+      playerRow.appendChild(sq);
     });
+  }
 
-    // Check button
-    document.getElementById('btn-check').addEventListener('click', runCheck);
+  buildPlayerRow();
 
-    // Give up button
-    document.getElementById('btn-giveup').addEventListener('click', () => {
-      document.getElementById('answer-section').classList.add('visible');
-      document.getElementById('result').className = '';
-      document.getElementById('result').textContent = "Here's the correct order:";
+  function runCheck() {
+    let correct = 0;
+    playerOrder.forEach((color, i) => { if (color.name === answer[i].name) correct++; });
+    const result = document.getElementById('result');
+    if (correct === 8) {
+      result.textContent = `All 8 correct — ${moves} move${moves !== 1 ? 's' : ''} in ${document.getElementById('timer-display').textContent}`;
+      result.className = 'win';
       stopTimer();
       disableGame();
-    });
-
-    function disableGame() {
-      document.getElementById('btn-check').disabled = true;
-      document.getElementById('btn-giveup').disabled = true;
-      document.querySelectorAll('#player-row .square').forEach(sq => {
-        sq.draggable = false;
-        sq.style.cursor = 'default';
-      });
+    } else {
+      result.className = '';
+      result.textContent = `${correct} correct, ${8 - correct} incorrect`;
     }
-  </script>
+  }
+
+  document.getElementById('btn-start').addEventListener('click', () => {
+    const overlay = document.getElementById('overlay');
+    overlay.classList.add('hidden');
+    overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+    startTimer();
+    runCheck();
+  });
+
+  document.getElementById('btn-check').addEventListener('click', runCheck);
+
+  document.getElementById('btn-giveup').addEventListener('click', () => {
+    document.getElementById('answer-overlay').classList.add('visible');
+    stopTimer();
+    disableGame();
+  });
+
+  function disableGame() {
+    document.getElementById('btn-check').disabled = true;
+    document.getElementById('btn-giveup').disabled = true;
+    document.querySelectorAll('#player-row .square').forEach(sq => {
+      sq.draggable = false;
+      sq.style.cursor = 'default';
+    });
+  }
+</script>
 </body>
 </html>
